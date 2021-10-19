@@ -21,7 +21,7 @@ import com.wj.jd.widget.WidgetUpdateDataUtil
  */
 object HomeNotificationUtil {
     fun notification() {
-        var notifyCationShow = CacheUtil.getString("CacheUtil")
+        var notifyCationShow = CacheUtil.getString("notifyCationShow")
         val ck = HttpUtil.getCK("ck")
         if ("1" == notifyCationShow && !TextUtils.isEmpty(ck)) {
             sendNotification()
@@ -47,7 +47,7 @@ object HomeNotificationUtil {
             builder.setDefaults(NotificationCompat.FLAG_NO_CLEAR)
         }
 
-        var remoteViews = RemoteViews(MyApplication.mInstance.packageName, R.layout.widges_layout)
+        var remoteViews = RemoteViews(MyApplication.mInstance.packageName, R.layout.widges_layout_noti)
 
         builder
             .setSmallIcon(R.mipmap.ic_launcher)
