@@ -12,7 +12,6 @@ import com.wj.jd.MyApplication
 import com.wj.jd.R
 import com.wj.jd.util.CacheUtil
 import com.wj.jd.util.HttpUtil
-import com.wj.jd.widget.WidgetUpdateDataUtil
 
 /**
  * author wangjing
@@ -33,7 +32,7 @@ object HomeNotificationUtil {
         var builder: NotificationCompat.Builder? = null
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channelId = "常驻信息"
-            val channel = NotificationChannel(channelId, "常驻信息", NotificationManager.IMPORTANCE_DEFAULT)
+            val channel = NotificationChannel(channelId, "常驻信息", NotificationManager.IMPORTANCE_HIGH)
             channel.enableVibration(false)
             channel.vibrationPattern = longArrayOf(0)
             channel.lockscreenVisibility = Notification.VISIBILITY_PRIVATE
@@ -47,13 +46,11 @@ object HomeNotificationUtil {
             builder.setDefaults(NotificationCompat.FLAG_NO_CLEAR)
         }
 
-        var remoteViews = RemoteViews(MyApplication.mInstance.packageName, R.layout.widges_layout_noti)
+        var remoteViews = RemoteViews(MyApplication.mInstance.packageName, R.layout.widges_layout)
 
         builder
             .setSmallIcon(R.mipmap.ic_launcher)
             .setCustomBigContentView(remoteViews)
-            .setCustomContentView(remoteViews)
-            .setContent(remoteViews)
             .setAutoCancel(false) //设置通知被点击一次是否自动取消
             .setOnlyAlertOnce(true)
         val notification = builder.build()
