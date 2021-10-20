@@ -51,7 +51,8 @@
             android:gravity="center_vertical"
             android:text="固定通知栏显示（单账号）"
             android:textColor="@color/black"
-            android:textSize="@dimen/dp_15" />
+            android:textSize="@dimen/dp_15"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -176,10 +177,10 @@
         </LinearLayout>
 
         <LinearLayout
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_40"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="0dp"

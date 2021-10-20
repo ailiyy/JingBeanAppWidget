@@ -199,6 +199,13 @@ class MainActivity : BaseActivity() {
         addQQGroup.setOnClickListener {
             joinQQGroup("qxW1vPr7rdC3o7W4Bes1xsh94xx4QOPV")
         }
+
+        addTGGroup.setOnClickListener {
+            val intent = Intent()
+            intent.action = "android.intent.action.VIEW"
+            intent.data = Uri.parse("http://a.wangjing520.cn:5701/")
+            startActivity(intent)
+        }
     }
 
     /****************
