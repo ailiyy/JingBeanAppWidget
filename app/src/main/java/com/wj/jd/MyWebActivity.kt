@@ -3,6 +3,7 @@ package com.wj.jd
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.text.TextUtils
 import android.webkit.CookieManager
 import android.webkit.CookieSyncManager
 import android.widget.Toast
@@ -17,7 +18,12 @@ class MyWebActivity : BaseActivity() {
     }
 
     override fun initView() {
-        setTitle("网页浏览器")
+        var title = intent.getStringExtra("title")
+        if (TextUtils.isEmpty(title)) {
+            setTitle("网页浏览器")
+        } else {
+            setTitle(title)
+        }
     }
 
     override fun initData() {

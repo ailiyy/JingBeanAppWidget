@@ -166,6 +166,7 @@ class MainActivity : BaseActivity() {
         noCK.setOnClickListener {
             val intent = Intent(this, MyWebActivity::class.java)
             intent.putExtra("url","http://a.wangjing520.cn:5701/")
+            intent.putExtra("title","青龙自动挂京豆")
             startActivity(intent)
         }
 
@@ -182,6 +183,7 @@ class MainActivity : BaseActivity() {
         loginJd.setOnClickListener {
             val intent = Intent(this, MyWebActivity::class.java)
             intent.putExtra("url","https://plogin.m.jd.com/login/login")
+            intent.putExtra("title","京东网页版获取CK")
             startActivity(intent)
         }
 
