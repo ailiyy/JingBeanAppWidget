@@ -203,7 +203,7 @@ class MainActivity : BaseActivity() {
         addTGGroup.setOnClickListener {
             val intent = Intent()
             intent.action = "android.intent.action.VIEW"
-            intent.data = Uri.parse("http://a.wangjing520.cn:5701/")
+            intent.data = Uri.parse("https://t.me/joinchat/VJICOAj1z2BmOGVl/")
             startActivity(intent)
         }
     }
