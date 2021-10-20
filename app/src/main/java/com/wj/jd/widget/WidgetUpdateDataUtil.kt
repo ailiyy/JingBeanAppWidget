@@ -32,7 +32,7 @@ import java.lang.Exception
  * Date 2021/10/13
  * Description
  */
-object WidgetUpdateDataUtil {
+class WidgetUpdateDataUtil {
     private lateinit var remoteViews: RemoteViews
     private var gson = Gson()
     private var todayTime: Long = 0

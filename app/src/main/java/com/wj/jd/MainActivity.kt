@@ -28,6 +28,10 @@ class MainActivity : BaseActivity() {
     private lateinit var notificationUpdateReceiver1: NotificationUpdateReceiver1
     private lateinit var notificationUpdateReceiver2: NotificationUpdateReceiver2
 
+    private lateinit var widgetUpdateDataUtil1: WidgetUpdateDataUtil
+    private lateinit var widgetUpdateDataUtil2: WidgetUpdateDataUtil
+    private lateinit var widgetUpdateDataUtil3: WidgetUpdateDataUtil
+
     override fun setLayoutId(): Int {
         return R.layout.activity_main
     }
@@ -38,6 +42,10 @@ class MainActivity : BaseActivity() {
     }
 
     override fun initData() {
+        widgetUpdateDataUtil1 = WidgetUpdateDataUtil()
+        widgetUpdateDataUtil2 = WidgetUpdateDataUtil()
+        widgetUpdateDataUtil3 = WidgetUpdateDataUtil()
+
         checkAppUpdate()
         initNotification()
         startUpdateService()
@@ -192,7 +200,7 @@ class MainActivity : BaseActivity() {
                 CacheUtil.putString("ck", inputCK.text.toString())
                 Toast.makeText(this, "CK添加成功", Toast.LENGTH_SHORT).show()
                 inputCK.setText("")
-                WidgetUpdateDataUtil.updateWidget("ck")
+                widgetUpdateDataUtil1.updateWidget("ck")
             }
         }
 
@@ -232,21 +240,21 @@ class MainActivity : BaseActivity() {
     inner class NotificationUpdateReceiver : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             Log.i("====", "NotificationUpdateReceiver")
-            WidgetUpdateDataUtil.updateWidget("ck")
+            widgetUpdateDataUtil1.updateWidget("ck")
         }
     }
 
     inner class NotificationUpdateReceiver1 : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             Log.i("====", "NotificationUpdateReceiver1")
-            WidgetUpdateDataUtil.updateWidget("ck1")
+            widgetUpdateDataUtil2.updateWidget("ck1")
         }
     }
 
     inner class NotificationUpdateReceiver2 : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             Log.i("====", "NotificationUpdateReceiver1")
-            WidgetUpdateDataUtil.updateWidget("ck2")
+            widgetUpdateDataUtil3.updateWidget("ck2")
         }
     }
 }
