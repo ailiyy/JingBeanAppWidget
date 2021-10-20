@@ -95,7 +95,7 @@ object HttpUtil {
         if (TextUtils.isEmpty(str)) return
         OkGo.post<String>("https://api.m.jd.com/client.action?functionId=getJingBeanBalanceDetail")
             .tag(key)
-            .params("body", "{\"pageSize\":\"20\",\"page\":\"$page\"}")
+            .params("body", "{\"pageSize\":\"60\",\"page\":\"$page\"}")
             .params("appid", "ld")
             .headers(
                 "User-Agent",
