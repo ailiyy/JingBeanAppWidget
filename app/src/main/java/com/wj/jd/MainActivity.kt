@@ -164,9 +164,8 @@ class MainActivity : BaseActivity() {
 
     override fun setEvent() {
         noCK.setOnClickListener {
-            val intent = Intent()
-            intent.action = "android.intent.action.VIEW"
-            intent.data = Uri.parse("http://a.wangjing520.cn:5701/")
+            val intent = Intent(this, MyWebActivity::class.java)
+            intent.putExtra("url","http://a.wangjing520.cn:5701/")
             startActivity(intent)
         }
 
@@ -182,6 +181,7 @@ class MainActivity : BaseActivity() {
 
         loginJd.setOnClickListener {
             val intent = Intent(this, MyWebActivity::class.java)
+            intent.putExtra("url","https://plogin.m.jd.com/login/login")
             startActivity(intent)
         }
 

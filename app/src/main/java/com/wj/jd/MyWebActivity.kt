@@ -23,7 +23,8 @@ class MyWebActivity : BaseActivity() {
 
     override fun initData() {
         removeCookie(this)
-        mCommonWebView.loadUrl("https://plogin.m.jd.com/login/login")
+        var url = intent.getStringExtra("url")
+        mCommonWebView.loadUrl(url)
     }
 
     override fun setEvent() {
