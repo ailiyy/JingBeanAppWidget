@@ -7,6 +7,7 @@ import android.appwidget.AppWidgetManager.ACTION_APPWIDGET_UPDATE
 import android.content.ComponentName
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.widget.RemoteViews
 import com.wj.jd.R
 import com.wj.jd.util.UpdateTask
@@ -32,6 +33,7 @@ class MyAppWidgetProvider : AppWidgetProvider() {
     override fun onReceive(context: Context, intent: Intent) {
         super.onReceive(context, intent)
         //这里判断是自己的action，做自己的事情
+        Log.i("====", "onReceive")
         if (intent.action == ACTION_APPWIDGET_UPDATE) {
             UpdateTask.widgetUpdateDataUtil1.updateWidget("ck")
         }
@@ -64,7 +66,6 @@ class MyAppWidgetProvider : AppWidgetProvider() {
     override fun onDisabled(context: Context) {
 //        context.stopService(Intent(context, UpdateDataService::class.java))
     }
-
     /*
      * 当小部件大小改变时
      */
