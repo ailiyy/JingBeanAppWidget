@@ -44,4 +44,16 @@ object TimeUtil {
         cal.add(Calendar.DATE, ago)
         return SimpleDateFormat("yyyy-MM-dd ").format(cal.time)
     }
+
+    private var lastClickTime: Long = 0
+
+    @Synchronized
+    fun isFastClick(): Boolean {
+        if (System.currentTimeMillis() - lastClickTime < 1500) {
+            lastClickTime = System.currentTimeMillis()
+            return true
+        }
+        lastClickTime = System.currentTimeMillis()
+        return false
+    }
 }

@@ -42,6 +42,10 @@ class WidgetUpdateDataUtil {
 
     @Synchronized
     fun updateWidget(key: String) {
+        if (TimeUtil.isFastClick()) {
+            return
+        }
+
         thisKey = key
         val str = HttpUtil.getCK(thisKey)
         if (TextUtils.isEmpty(str)) return
