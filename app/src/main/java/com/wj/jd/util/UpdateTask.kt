@@ -2,6 +2,7 @@ package com.wj.jd.util
 
 import android.os.Handler
 import android.os.Looper
+import com.wj.jd.MainActivity
 import com.wj.jd.widget.WidgetUpdateDataUtil
 
 /**
@@ -10,18 +11,22 @@ import com.wj.jd.widget.WidgetUpdateDataUtil
  * Description
  */
 object UpdateTask {
+    var widgetUpdateDataUtil1 = WidgetUpdateDataUtil()
+    var widgetUpdateDataUtil2 = WidgetUpdateDataUtil()
+    var widgetUpdateDataUtil3 = WidgetUpdateDataUtil()
+
     var handler = Handler(Looper.getMainLooper())
 
     fun updateAll() {
         handler.post {
-            WidgetUpdateDataUtil.updateWidget("ck")
+            widgetUpdateDataUtil1.updateWidget("ck")
         }
         handler.postDelayed({
-            WidgetUpdateDataUtil.updateWidget("ck1")
+            widgetUpdateDataUtil2.updateWidget("ck1")
         }, 2000)
 
         handler.postDelayed({
-            WidgetUpdateDataUtil.updateWidget("ck2")
+            widgetUpdateDataUtil3.updateWidget("ck2")
         }, 4000)
     }
 }

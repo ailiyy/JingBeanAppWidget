@@ -2,6 +2,7 @@ package com.wj.jd
 
 import android.widget.Toast
 import com.wj.jd.util.CacheUtil
+import com.wj.jd.util.UpdateTask
 import com.wj.jd.widget.WidgetUpdateDataUtil
 import kotlinx.android.synthetic.main.activity_setting.*
 
@@ -77,7 +78,7 @@ class SettingActivity : BaseActivity() {
         }
 
         settingFinish.setOnClickListener {
-            WidgetUpdateDataUtil.updateWidget("ck")
+            UpdateTask.updateAll()
             Toast.makeText(this, "小组件状态更新完毕", Toast.LENGTH_SHORT).show()
         }
 

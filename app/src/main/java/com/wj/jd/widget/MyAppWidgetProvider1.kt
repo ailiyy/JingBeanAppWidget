@@ -9,6 +9,7 @@ import android.content.Context
 import android.os.Bundle
 import android.widget.RemoteViews
 import com.wj.jd.R
+import com.wj.jd.util.UpdateTask
 import com.wj.jd.util.dmToPx
 
 class MyAppWidgetProvider1 : AppWidgetProvider() {
@@ -32,7 +33,7 @@ class MyAppWidgetProvider1 : AppWidgetProvider() {
         super.onReceive(context, intent)
         //这里判断是自己的action，做自己的事情
         if (intent.action == ACTION_APPWIDGET_UPDATE) {
-            WidgetUpdateDataUtil.updateWidget("ck1")
+            UpdateTask.widgetUpdateDataUtil2.updateWidget("ck1")
         }
     }
 

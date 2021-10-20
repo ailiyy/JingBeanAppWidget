@@ -3,6 +3,7 @@ package com.wj.jd
 import android.text.TextUtils
 import android.widget.Toast
 import com.wj.jd.util.CacheUtil
+import com.wj.jd.util.UpdateTask
 import com.wj.jd.widget.WidgetUpdateDataUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_much.*
@@ -30,7 +31,7 @@ class MuchCkActivity : BaseActivity() {
             } else {
                 CacheUtil.putString("ck1", inputCK1.text.toString())
                 Toast.makeText(this, "CK2添加成功", Toast.LENGTH_SHORT).show()
-                WidgetUpdateDataUtil.updateWidget("ck1")
+                UpdateTask.widgetUpdateDataUtil2.updateWidget("ck1")
             }
         }
 
@@ -40,7 +41,7 @@ class MuchCkActivity : BaseActivity() {
             } else {
                 CacheUtil.putString("ck2", inputCK2.text.toString())
                 Toast.makeText(this, "CK3添加成功", Toast.LENGTH_SHORT).show()
-                WidgetUpdateDataUtil.updateWidget("ck2")
+                UpdateTask.widgetUpdateDataUtil3.updateWidget("ck2")
             }
         }
     }
