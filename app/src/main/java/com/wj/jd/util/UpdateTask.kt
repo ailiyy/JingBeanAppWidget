@@ -23,10 +23,10 @@ object UpdateTask {
         }
         handler.postDelayed({
             widgetUpdateDataUtil2.updateWidget("ck1")
-        }, 2000)
+        }, 3000)
 
         handler.postDelayed({
             widgetUpdateDataUtil3.updateWidget("ck2")
-        }, 4000)
+        }, 6000)
     }
 }
