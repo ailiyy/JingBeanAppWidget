@@ -1,6 +1,6 @@
 package com.wj.jd.bean
 
-object UserBean {
+class UserBean {
     var nickName = ""
     var headImageUrl = ""
     var userLevel = ""
@@ -21,4 +21,6 @@ object UserBean {
     var isPlusVip = "0"
 
     var updateTips = ""
+
+    var page = 1
 }

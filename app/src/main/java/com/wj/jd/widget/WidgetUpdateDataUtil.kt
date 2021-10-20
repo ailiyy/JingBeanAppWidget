@@ -35,16 +35,18 @@ import java.lang.Exception
 object WidgetUpdateDataUtil {
     private lateinit var remoteViews: RemoteViews
     private var gson = Gson()
-    private var page = 1
     private var todayTime: Long = 0
     private var yesterdayTime: Long = 0
     lateinit var thisKey: String
+    private lateinit var userBean: UserBean
 
     @Synchronized
     fun updateWidget(key: String) {
         thisKey = key
         val str = HttpUtil.getCK(thisKey)
         if (TextUtils.isEmpty(str)) return
+
+        userBean = UserBean()
 
         remoteViews = RemoteViews(MyApplication.mInstance.packageName, R.layout.widges_layout)
         remoteViews.setViewPadding(R.id.rootParent, R.dimen.dp_15.dmToPx(), 0, R.dimen.dp_15.dmToPx(), 0)
@@ -55,9 +57,6 @@ object WidgetUpdateDataUtil {
         getUserInfo()
         getUserInfo1()
 
-        page = 1
-        UserBean.todayBean = 0
-        UserBean.ago1Bean = 0
         todayTime = TimeUtil.getTodayMillis(0)
         yesterdayTime = TimeUtil.getTodayMillis(-1)
 
@@ -73,9 +72,9 @@ object WidgetUpdateDataUtil {
                     var gson = Gson()
                     val versionBean = gson.fromJson(result, VersionBean::class.java)
                     if (DeviceUtil.getAppVersionName().equals(versionBean.release)) {
-                        UserBean.updateTips = ""
+                        userBean.updateTips = ""
                     } else {
-                        UserBean.updateTips = versionBean.widgetTip
+                        userBean.updateTips = versionBean.widgetTip
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -93,9 +92,9 @@ object WidgetUpdateDataUtil {
             override fun onSuccess(result: String) {
                 try {
                     val redPacket = gson.fromJson(result, RedPacket::class.java)
-                    UserBean.hb = redPacket.data.balance
-                    UserBean.gqhb = redPacket.data.expiredBalance
-                    UserBean.countdownTime = redPacket.data.countdownTime / 60 / 60
+                    userBean.hb = redPacket.data.balance
+                    userBean.gqhb = redPacket.data.expiredBalance
+                    userBean.countdownTime = redPacket.data.countdownTime / 60 / 60
                     setData()
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -112,7 +111,7 @@ object WidgetUpdateDataUtil {
             override fun onSuccess(result: String) {
                 try {
                     val job = JSONObject(result)
-                    UserBean.jxiang = job.optJSONObject("user").optString("uclass").replace("京享值", "")
+                    userBean.jxiang = job.optJSONObject("user").optString("uclass").replace("京享值", "")
                     setData()
                 } catch (e: Exception) {
                     e.printStackTrace()
@@ -131,16 +130,16 @@ object WidgetUpdateDataUtil {
                 try {
                     val job = JSONObject(result)
                     try {
-                        UserBean.nickName = job.optJSONObject("data").optJSONObject("userInfo").optJSONObject("baseInfo").optString("nickname")
-                        UserBean.userLevel = job.optJSONObject("data").optJSONObject("userInfo").optJSONObject("baseInfo").optString("userLevel")
-                        UserBean.levelName = job.optJSONObject("data").optJSONObject("userInfo").optJSONObject("baseInfo").optString("levelName")
-                        UserBean.headImageUrl = job.optJSONObject("data").optJSONObject("userInfo").optJSONObject("baseInfo").optString("headImageUrl")
-                        UserBean.isPlusVip = job.optJSONObject("data").optJSONObject("userInfo").optString("isPlusVip")
+                        userBean.nickName = job.optJSONObject("data").optJSONObject("userInfo").optJSONObject("baseInfo").optString("nickname")
+                        userBean.userLevel = job.optJSONObject("data").optJSONObject("userInfo").optJSONObject("baseInfo").optString("userLevel")
+                        userBean.levelName = job.optJSONObject("data").optJSONObject("userInfo").optJSONObject("baseInfo").optString("levelName")
+                        userBean.headImageUrl = job.optJSONObject("data").optJSONObject("userInfo").optJSONObject("baseInfo").optString("headImageUrl")
+                        userBean.isPlusVip = job.optJSONObject("data").optJSONObject("userInfo").optString("isPlusVip")
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
                     try {
-                        UserBean.beanNum = job.optJSONObject("data").optJSONObject("assetInfo").optString("beanNum")
+                        userBean.beanNum = job.optJSONObject("data").optJSONObject("assetInfo").optString("beanNum")
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
@@ -158,7 +157,7 @@ object WidgetUpdateDataUtil {
 
     @Synchronized
     private fun getJingBeanData() {
-        HttpUtil.getJD(thisKey, page, object : StringCallBack {
+        HttpUtil.getJD(thisKey, userBean.page, object : StringCallBack {
             override fun onSuccess(result: String) {
                 try {
                     Log.i("====", result)
@@ -170,7 +169,7 @@ object WidgetUpdateDataUtil {
                         val beanDay = parseTime(detail.date)!!
                         if (beanDay > todayTime) {
                             if (detail.amount > 0) {
-                                UserBean.todayBean = UserBean.todayBean + detail.amount
+                                userBean.todayBean = userBean.todayBean + detail.amount
                             }
                         } else {
                             isFinish = false
@@ -178,7 +177,7 @@ object WidgetUpdateDataUtil {
                         }
                     }
                     if (isFinish) {
-                        page++
+                        userBean.page++
                         getJingBeanData()
                     } else {
                         Log.i("====", TimeUtil.getYesterDay(-1))
@@ -188,7 +187,7 @@ object WidgetUpdateDataUtil {
                             get1AgoBeanData()
                         } else {
                             Log.i("====", "使用缓存数据")
-                            UserBean.ago1Bean = oneAgoJBeanNum?.toInt()!!
+                            userBean.ago1Bean = oneAgoJBeanNum?.toInt()!!
                         }
                         setData()
                     }
@@ -203,7 +202,7 @@ object WidgetUpdateDataUtil {
     }
 
     private fun get1AgoBeanData() {
-        HttpUtil.getJD(thisKey, page, object : StringCallBack {
+        HttpUtil.getJD(thisKey, userBean.page, object : StringCallBack {
             override fun onSuccess(result: String) {
                 try {
                     val jingDouBean = gson.fromJson(result, JingDouBean::class.java)
@@ -214,7 +213,7 @@ object WidgetUpdateDataUtil {
                         val beanDay = parseTime(detail.date)!!
                         if (beanDay in (yesterdayTime + 1) until todayTime) {
                             if (detail.amount > 0) {
-                                UserBean.ago1Bean = UserBean.ago1Bean + detail.amount
+                                userBean.ago1Bean = userBean.ago1Bean + detail.amount
                             }
                         } else if (beanDay < yesterdayTime) {
                             isFinish = false
@@ -222,10 +221,10 @@ object WidgetUpdateDataUtil {
                         }
                     }
                     if (isFinish) {
-                        page++
+                        userBean.page++
                         get1AgoBeanData()
                     } else {
-                        CacheUtil.putString(TimeUtil.getYesterDay(-1) + thisKey, UserBean.ago1Bean.toString())
+                        CacheUtil.putString(TimeUtil.getYesterDay(-1) + thisKey, userBean.ago1Bean.toString())
                         setData()
                     }
                 } catch (e: Exception) {
@@ -250,20 +249,20 @@ object WidgetUpdateDataUtil {
         if ("1" == CacheUtil.getString("hideNichen")) {
             remoteViews.setTextViewText(R.id.nickName, "***")
         } else {
-            remoteViews.setTextViewText(R.id.nickName, UserBean.nickName)
+            remoteViews.setTextViewText(R.id.nickName, userBean.nickName)
         }
 
-        if ("1" == UserBean.isPlusVip) {
+        if ("1" == userBean.isPlusVip) {
             remoteViews.setViewVisibility(R.id.plusIcon, View.VISIBLE)
         } else {
             remoteViews.setViewVisibility(R.id.plusIcon, View.GONE)
         }
 
-        if (TextUtils.isEmpty(UserBean.updateTips)) {
+        if (TextUtils.isEmpty(userBean.updateTips)) {
             remoteViews.setViewVisibility(R.id.haveNewVersion, View.GONE)
         } else {
             remoteViews.setViewVisibility(R.id.haveNewVersion, View.VISIBLE)
-            remoteViews.setTextViewText(R.id.haveNewVersion, UserBean.updateTips)
+            remoteViews.setTextViewText(R.id.haveNewVersion, userBean.updateTips)
         }
 
         var paddingType = CacheUtil.getString("paddingType")
@@ -284,23 +283,23 @@ object WidgetUpdateDataUtil {
         val clearIntent2 = PendingIntent.getActivity(MyApplication.mInstance, 3, cleatInt2, PendingIntent.FLAG_UPDATE_CURRENT)
         remoteViews.setOnClickPendingIntent(R.id.rightContent, clearIntent2)
 
-        remoteViews.setTextViewText(R.id.beanNum, UserBean.beanNum)
-        remoteViews.setTextViewText(R.id.todayBean, "+" + UserBean.todayBean)
-        remoteViews.setTextViewText(R.id.todayBeanNum, UserBean.todayBean.toString())
-        remoteViews.setTextViewText(R.id.oneAgoBeanNum, UserBean.ago1Bean.toString())
+        remoteViews.setTextViewText(R.id.beanNum, userBean.beanNum)
+        remoteViews.setTextViewText(R.id.todayBean, "+" + userBean.todayBean)
+        remoteViews.setTextViewText(R.id.todayBeanNum, userBean.todayBean.toString())
+        remoteViews.setTextViewText(R.id.oneAgoBeanNum, userBean.ago1Bean.toString())
         remoteViews.setTextViewText(R.id.updateTime, "数据更新于:" + getCurrentData())
-        remoteViews.setTextViewText(R.id.hongbao, UserBean.hb)
+        remoteViews.setTextViewText(R.id.hongbao, userBean.hb)
         try {
-            if (getCurrentHH() + UserBean.countdownTime > 24) {
-                remoteViews.setTextViewText(R.id.guoquHb, "明日过期:" + UserBean.gqhb)
+            if (getCurrentHH() + userBean.countdownTime > 24) {
+                remoteViews.setTextViewText(R.id.guoquHb, "明日过期:" + userBean.gqhb)
             } else {
-                remoteViews.setTextViewText(R.id.guoquHb, "今日过期:" + UserBean.gqhb)
+                remoteViews.setTextViewText(R.id.guoquHb, "今日过期:" + userBean.gqhb)
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            remoteViews.setTextViewText(R.id.guoquHb, "今日过期:" + UserBean.gqhb)
+            remoteViews.setTextViewText(R.id.guoquHb, "今日过期:" + userBean.gqhb)
         }
-        remoteViews.setTextViewText(R.id.jingXiang, UserBean.jxiang)
+        remoteViews.setTextViewText(R.id.jingXiang, userBean.jxiang)
 
 
         val cleatIntent = Intent()
@@ -315,7 +314,7 @@ object WidgetUpdateDataUtil {
         val clearIntent3 = PendingIntent.getBroadcast(MyApplication.mInstance, 0, cleatIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         remoteViews.setOnClickPendingIntent(R.id.headImg, clearIntent3)
 
-        if (TextUtils.isEmpty(UserBean.headImageUrl)) {
+        if (TextUtils.isEmpty(userBean.headImageUrl)) {
             Glide.with(MyApplication.mInstance)
                 .load(R.mipmap.icon_head_def)
                 .into(object : SimpleTarget<Drawable?>() {
@@ -331,7 +330,7 @@ object WidgetUpdateDataUtil {
                 })
         } else {
             Glide.with(MyApplication.mInstance)
-                .load(UserBean.headImageUrl)
+                .load(userBean.headImageUrl)
                 .into(object : SimpleTarget<Drawable?>() {
                     override fun onResourceReady(resource: Drawable, transition: Transition<in Drawable?>?) {
                         val head = BitmapUtil.drawableToBitmap(resource)
