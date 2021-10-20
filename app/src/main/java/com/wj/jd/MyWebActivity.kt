@@ -3,7 +3,6 @@ package com.wj.jd
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
-import android.util.Log
 import android.webkit.CookieManager
 import android.webkit.CookieSyncManager
 import android.widget.Toast
