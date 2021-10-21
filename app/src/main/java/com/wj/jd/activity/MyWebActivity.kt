@@ -1,4 +1,4 @@
-package com.wj.jd
+package com.wj.jd.activity
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -7,6 +7,9 @@ import android.text.TextUtils
 import android.webkit.CookieManager
 import android.webkit.CookieSyncManager
 import android.widget.Toast
+import com.wj.jd.BaseActivity
+import com.wj.jd.MyApplication
+import com.wj.jd.R
 import com.wj.jd.dialog.NewStyleDialog
 import com.wj.jd.webView.CommonWebView
 import kotlinx.android.synthetic.main.activity_web.*

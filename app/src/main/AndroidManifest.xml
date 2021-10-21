@@ -24,11 +24,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SettingActivity" />
+        <activity android:name=".activity.SettingActivity" />
 
-        <activity android:name=".MuchCkActivity" />
+        <activity android:name=".activity.MuchCkActivity" />
 
-        <activity android:name=".MyWebActivity" />
+        <activity android:name=".activity.MyWebActivity" />
 
         <receiver
             android:name=".widget.MyAppWidgetProvider"

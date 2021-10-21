@@ -1,13 +1,12 @@
-package com.wj.jd
+package com.wj.jd.activity
 
 import android.text.TextUtils
 import android.widget.Toast
+import com.wj.jd.BaseActivity
+import com.wj.jd.R
 import com.wj.jd.util.CacheUtil
 import com.wj.jd.util.UpdateTask
-import com.wj.jd.widget.WidgetUpdateDataUtil
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_much.*
-import kotlinx.android.synthetic.main.activity_setting.*
 
 class MuchCkActivity : BaseActivity() {
 

@@ -14,12 +14,13 @@ import android.widget.Toast
 import com.google.gson.Gson
 import com.liulishuo.filedownloader.BaseDownloadTask
 import com.liulishuo.filedownloader.FileDownloader
+import com.wj.jd.activity.MuchCkActivity
+import com.wj.jd.activity.MyWebActivity
+import com.wj.jd.activity.SettingActivity
 import com.wj.jd.bean.SimpleFileDownloadListener
 import com.wj.jd.bean.VersionBean
 import com.wj.jd.dialog.NewStyleDialog
-import com.wj.jd.notification.HomeNotificationUtil
 import com.wj.jd.util.*
-import com.wj.jd.widget.WidgetUpdateDataUtil
 import com.zhy.base.fileprovider.FileProvider7
 import java.io.File
 
@@ -41,7 +42,6 @@ class MainActivity : BaseActivity() {
         checkAppUpdate()
         initNotification()
         startUpdateService()
-        HomeNotificationUtil.notification()
     }
 
     private fun startUpdateService() {
