@@ -8,7 +8,6 @@ import android.widget.LinearLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wj.jd.R
-import java.security.Key
 
 class MenuDialog(var mActivity: Activity, private var dataList: ArrayList<String>, var itemClick: (key: String) -> Unit) : Dialog(mActivity!!) {
     private lateinit var mRecyclerView: RecyclerView
@@ -30,6 +29,11 @@ class MenuDialog(var mActivity: Activity, private var dataList: ArrayList<String
         adapter.dataList = dataList
         mRecyclerView.layoutManager = LinearLayoutManager(context)
         mRecyclerView.adapter = adapter
+        adapter.onItemClickListener = object : MyMenuDialogAdapter.OnItemClickListener {
+            override fun click() {
+                dismiss()
+            }
+        }
         return this
     }
 
