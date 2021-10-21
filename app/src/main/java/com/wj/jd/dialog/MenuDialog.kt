@@ -54,8 +54,4 @@ class MenuDialog(var mActivity: Activity, private var dataList: ArrayList<String
             e.printStackTrace()
         }
     }
-
-    interface OnItemClickListener {
-        fun itemClick(key: String)
-    }
 }

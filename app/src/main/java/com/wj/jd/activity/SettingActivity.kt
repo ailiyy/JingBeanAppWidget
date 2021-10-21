@@ -83,6 +83,12 @@ class SettingActivity : BaseActivity() {
 
         designColor.setOnClickListener {
             var inputDialog = InputDialog(this)
+            inputDialog.onOkClickListener = object : InputDialog.OnOkClickListener {
+                override fun ok(str: String) {
+                    Toast.makeText(MyApplication.mInstance, str, Toast.LENGTH_SHORT).show()
+
+                }
+            }
             inputDialog.pop()
         }
     }
