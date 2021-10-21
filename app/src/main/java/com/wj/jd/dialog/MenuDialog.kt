@@ -1,17 +1,20 @@
 package com.wj.jd.dialog
 
+import android.app.Activity
 import android.app.Dialog
-import android.content.Context
 import android.graphics.Color
 import android.view.View
 import android.widget.LinearLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wj.jd.R
 
-class MenuDialog : Dialog {
+class MenuDialog(var mActivity: Activity) : Dialog(mActivity!!) {
     private lateinit var mRecyclerView: RecyclerView
 
-    constructor(context: Context?) : super(context!!)
+    init {
+        initView()
+    }
 
     fun initView(): MenuDialog {
         setContentView(R.layout.dialog_layout_style2)
@@ -22,6 +25,10 @@ class MenuDialog : Dialog {
         divider?.setBackgroundColor(Color.TRANSPARENT)
         window?.setBackgroundDrawableResource(android.R.color.transparent)
         window?.setLayout(context.resources.displayMetrics.widthPixels * 5 / 6, LinearLayout.LayoutParams.WRAP_CONTENT)
+
+        var adapter = MyMenuDialogAdapter(mActivity)
+        mRecyclerView.layoutManager = LinearLayoutManager(context)
+        mRecyclerView.adapter = adapter
         return this
     }
 
