@@ -290,19 +290,6 @@ class WidgetUpdateDataUtil {
 //            remoteViews.setInt(R.id.contentParent, "setBackgroundResource", Color.BLUE)
 //        }
 
-
-        val strokeWidth = 0
-        val radius = 0f // 15 圆角半径
-        val strokeColor = Color.parseColor("#cccccc") //边框颜色
-        val bgColor = Color.parseColor("#cccccc") //内部填充颜色
-        val gd = GradientDrawable() //创建drawable
-        gd.setColor(bgColor)
-        gd.cornerRadius = radius
-        gd.setStroke(strokeWidth, strokeColor)
-
-        val head = BitmapUtil.getColorBitmap()
-//        remoteViews.setImageViewBitmap(R.id.background, head)
-
         val cleatInt2 = Intent(MyApplication.mInstance, MainActivity::class.java)
         cleatInt2.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         val clearIntent2 = PendingIntent.getActivity(MyApplication.mInstance, 3, cleatInt2, PendingIntent.FLAG_UPDATE_CURRENT)
