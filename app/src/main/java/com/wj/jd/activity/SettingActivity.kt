@@ -1,5 +1,6 @@
 package com.wj.jd.activity
 
+import android.text.TextUtils
 import android.widget.Toast
 import com.wj.jd.BaseActivity
 import com.wj.jd.MyApplication
@@ -34,7 +35,11 @@ class SettingActivity : BaseActivity() {
         startUpdateService.isChecked = "1" != CacheUtil.getString("startUpdateService")
 
         val paddingType = CacheUtil.getString("paddingType")
-        paddingTip.text = paddingType
+        paddingTip.text = if (TextUtils.isEmpty(paddingType)) {
+            "15dp"
+        } else {
+            paddingType
+        }
     }
 
     override fun setEvent() {

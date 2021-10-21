@@ -270,15 +270,15 @@ class WidgetUpdateDataUtil {
         }
 
         var paddingType = CacheUtil.getString("paddingType")
-        if (TextUtils.isEmpty(paddingType) || "padding15" == paddingType) {
+        if (TextUtils.isEmpty(paddingType) || "15dp" == paddingType) {
             remoteViews.setViewPadding(R.id.rootParent, R.dimen.dp_15.dmToPx(), 0, R.dimen.dp_15.dmToPx(), 0)
-        } else if ("padding0" == paddingType) {
+        } else if ("无边距" == paddingType) {
             remoteViews.setViewPadding(R.id.rootParent, 0, 0, 0, 0)
-        } else if ("padding5" == paddingType) {
+        } else if ("5dp" == paddingType) {
             remoteViews.setViewPadding(R.id.rootParent, R.dimen.dp_5.dmToPx(), 0, R.dimen.dp_5.dmToPx(), 0)
-        } else if ("padding10" == paddingType) {
+        } else if ("10dp" == paddingType) {
             remoteViews.setViewPadding(R.id.rootParent, R.dimen.dp_10.dmToPx(), 0, R.dimen.dp_10.dmToPx(), 0)
-        } else if ("padding20" == paddingType) {
+        } else if ("20dp" == paddingType) {
             remoteViews.setViewPadding(R.id.rootParent, R.dimen.dp_20.dmToPx(), 0, R.dimen.dp_20.dmToPx(), 0)
         }
 
