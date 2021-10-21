@@ -13,14 +13,15 @@ import com.wj.jd.R
  * Date 2021/10/21
  * Description
  */
-class MyMenuDialogAdapter(private val mActivity: Activity) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MyMenuDialogAdapter(private val mActivity: Activity) : RecyclerView.Adapter<MyMenuDialogAdapter.MenuItem>() {
     var dataList: ArrayList<String>? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyMenuDialogAdapter.MenuItem {
         return MenuItem(LayoutInflater.from(mActivity).inflate(R.layout.menu_item, parent, false))
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyMenuDialogAdapter.MenuItem, position: Int) {
+        holder.title.text = dataList?.get(position)
     }
 
     override fun getItemCount(): Int {
