@@ -2,6 +2,7 @@ package com.wj.jd.activity
 
 import android.widget.Toast
 import com.wj.jd.BaseActivity
+import com.wj.jd.MyApplication
 import com.wj.jd.R
 import com.wj.jd.dialog.MenuDialog
 import com.wj.jd.util.CacheUtil
@@ -83,7 +84,7 @@ class SettingActivity : BaseActivity() {
 
         paddingTip.setOnClickListener {
             var menuDialog = MenuDialog(this, paddingDataList) {
-
+                Toast.makeText(MyApplication.mInstance, it, Toast.LENGTH_SHORT).show()
             }
             menuDialog.pop()
         }
