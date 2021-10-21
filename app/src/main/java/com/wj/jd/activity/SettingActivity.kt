@@ -3,6 +3,7 @@ package com.wj.jd.activity
 import android.widget.Toast
 import com.wj.jd.BaseActivity
 import com.wj.jd.R
+import com.wj.jd.dialog.MenuDialog
 import com.wj.jd.util.CacheUtil
 import com.wj.jd.util.UpdateTask
 import kotlinx.android.synthetic.main.activity_setting.*
@@ -76,6 +77,8 @@ class SettingActivity : BaseActivity() {
         }
 
         paddingTip.setOnClickListener {
+            var menuDialog = MenuDialog(this)
+            menuDialog.pop()
 
         }
 
