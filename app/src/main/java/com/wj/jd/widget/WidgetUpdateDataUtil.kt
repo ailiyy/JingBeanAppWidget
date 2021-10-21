@@ -300,8 +300,8 @@ class WidgetUpdateDataUtil {
         gd.cornerRadius = radius
         gd.setStroke(strokeWidth, strokeColor)
 
-        val head = BitmapUtil.drawableToBitmap(gd)
-        remoteViews.setImageViewBitmap(R.id.background, BitmapUtil.getColorBitmap())
+        val head = BitmapUtil.getColorBitmap()
+        remoteViews.setImageViewBitmap(R.id.background, head)
 
         val cleatInt2 = Intent(MyApplication.mInstance, MainActivity::class.java)
         cleatInt2.flags = Intent.FLAG_ACTIVITY_NEW_TASK
