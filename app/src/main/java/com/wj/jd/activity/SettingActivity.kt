@@ -19,9 +19,11 @@ class SettingActivity : BaseActivity() {
     override fun initView() {
         setTitle("小组件设置")
 
-        for (i in 0 until 20) {
-            paddingDataList.add(i.toString())
-        }
+        paddingDataList.add("无边距")
+        paddingDataList.add("5dp")
+        paddingDataList.add("10dp")
+        paddingDataList.add("15dp")
+        paddingDataList.add("20dp")
     }
 
     override fun initData() {
@@ -32,24 +34,7 @@ class SettingActivity : BaseActivity() {
         startUpdateService.isChecked = "1" != CacheUtil.getString("startUpdateService")
 
         val paddingType = CacheUtil.getString("paddingType")
-        paddingTip.text = when (paddingType) {
-            "padding0" -> {
-                "无边距"
-            }
-            "padding5" -> {
-                "5dp"
-            }
-            "padding10" -> {
-                "10dp"
-            }
-            "padding15" -> {
-                "15dp"
-            }
-            "padding20" -> {
-                "20dp"
-            }
-            else -> "15dp"
-        }
+        paddingTip.text = paddingType
     }
 
     override fun setEvent() {
@@ -84,34 +69,10 @@ class SettingActivity : BaseActivity() {
 
         paddingTip.setOnClickListener {
             var menuDialog = MenuDialog(this, paddingDataList) {
-                Toast.makeText(MyApplication.mInstance, it, Toast.LENGTH_SHORT).show()
+                CacheUtil.putString("paddingType", it)
+                paddingTip.text = it
             }
             menuDialog.pop()
-        }
-
-        padding0.setOnClickListener {
-            CacheUtil.putString("paddingType", "padding0")
-            paddingTip.text = "无边距"
-        }
-
-        padding5.setOnClickListener {
-            CacheUtil.putString("paddingType", "padding5")
-            paddingTip.text = "5dp"
-        }
-
-        padding10.setOnClickListener {
-            CacheUtil.putString("paddingType", "padding10")
-            paddingTip.text = "10dp"
-        }
-
-        padding15.setOnClickListener {
-            CacheUtil.putString("paddingType", "padding15")
-            paddingTip.text = "15dp"
-        }
-
-        padding20.setOnClickListener {
-            CacheUtil.putString("paddingType", "padding20")
-            paddingTip.text = "20dp"
         }
     }
 }
