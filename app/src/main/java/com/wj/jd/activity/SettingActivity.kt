@@ -5,6 +5,7 @@ import android.widget.Toast
 import com.wj.jd.BaseActivity
 import com.wj.jd.MyApplication
 import com.wj.jd.R
+import com.wj.jd.dialog.InputDialog
 import com.wj.jd.dialog.MenuDialog
 import com.wj.jd.util.CacheUtil
 import com.wj.jd.util.UpdateTask
@@ -78,6 +79,11 @@ class SettingActivity : BaseActivity() {
                 paddingTip.text = it
             }
             menuDialog.pop()
+        }
+
+        designColor.setOnClickListener {
+            var inputDialog = InputDialog(this)
+            inputDialog.pop()
         }
     }
 }
