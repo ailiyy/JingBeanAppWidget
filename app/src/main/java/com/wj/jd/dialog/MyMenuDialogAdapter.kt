@@ -14,7 +14,7 @@ import com.wj.jd.R
  * Description
  */
 class MyMenuDialogAdapter(private val mActivity: Activity) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var dataList: ArrayList<String>? = null
+    var dataList: ArrayList<String>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return MenuItem(LayoutInflater.from(mActivity).inflate(R.layout.menu_item, parent, false))
@@ -24,12 +24,11 @@ class MyMenuDialogAdapter(private val mActivity: Activity) : RecyclerView.Adapte
     }
 
     override fun getItemCount(): Int {
-        return 20
-//        return if (dataList == null) {
-//            0
-//        } else {
-//            dataList!!.size
-//        }
+        return if (dataList == null) {
+            0
+        } else {
+            dataList!!.size
+        }
     }
 
     inner class MenuItem(view: View) : RecyclerView.ViewHolder(view) {

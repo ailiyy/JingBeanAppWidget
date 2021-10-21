@@ -9,6 +9,7 @@ import com.wj.jd.util.UpdateTask
 import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity : BaseActivity() {
+    var paddingDataList = ArrayList<String>()
 
     override fun setLayoutId(): Int {
         return R.layout.activity_setting
@@ -16,6 +17,10 @@ class SettingActivity : BaseActivity() {
 
     override fun initView() {
         setTitle("小组件设置")
+
+        for (i in 0 until 20) {
+            paddingDataList.add(i.toString())
+        }
     }
 
     override fun initData() {
@@ -77,9 +82,8 @@ class SettingActivity : BaseActivity() {
         }
 
         paddingTip.setOnClickListener {
-            var menuDialog = MenuDialog(this)
+            var menuDialog = MenuDialog(this,paddingDataList)
             menuDialog.pop()
-
         }
 
         padding0.setOnClickListener {
