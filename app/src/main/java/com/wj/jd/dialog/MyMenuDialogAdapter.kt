@@ -13,7 +13,7 @@ import com.wj.jd.R
  * Date 2021/10/21
  * Description
  */
-class MyMenuDialogAdapter(private val mActivity: Activity, var onItemClickListener: MenuDialog.OnItemClickListener) : RecyclerView.Adapter<MyMenuDialogAdapter.MenuItem>() {
+class MyMenuDialogAdapter(private val mActivity: Activity,var itemClick: (key: String) -> Unit) : RecyclerView.Adapter<MyMenuDialogAdapter.MenuItem>() {
     var dataList: ArrayList<String>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyMenuDialogAdapter.MenuItem {
@@ -23,7 +23,7 @@ class MyMenuDialogAdapter(private val mActivity: Activity, var onItemClickListen
     override fun onBindViewHolder(holder: MyMenuDialogAdapter.MenuItem, position: Int) {
         holder.title.text = dataList?.get(position)
         holder.title.setOnClickListener {
-            onItemClickListener.itemClick(dataList?.get(holder.adapterPosition)!!)
+            itemClick(dataList?.get(holder.adapterPosition)!!)
         }
     }
 

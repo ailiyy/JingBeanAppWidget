@@ -82,7 +82,9 @@ class SettingActivity : BaseActivity() {
         }
 
         paddingTip.setOnClickListener {
-            var menuDialog = MenuDialog(this,paddingDataList)
+            var menuDialog = MenuDialog(this, paddingDataList) {
+
+            }
             menuDialog.pop()
         }
 
