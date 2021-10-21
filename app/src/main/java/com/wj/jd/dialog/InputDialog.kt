@@ -7,8 +7,10 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.wj.jd.MyApplication
 import com.wj.jd.R
 
 class InputDialog(var mActivity: Activity) : Dialog(mActivity!!) {
@@ -30,7 +32,14 @@ class InputDialog(var mActivity: Activity) : Dialog(mActivity!!) {
         window?.setBackgroundDrawableResource(android.R.color.transparent)
         window?.setLayout(context.resources.displayMetrics.widthPixels * 5 / 6, LinearLayout.LayoutParams.WRAP_CONTENT)
         ok.setOnClickListener {
-            onOkClickListener?.ok(input.text.toString())
+            try {
+                Color.parseColor(input.text.toString())
+                onOkClickListener?.ok(input.text.toString())
+                dismiss()
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(MyApplication.mInstance, "输入无效", Toast.LENGTH_SHORT).show()
+            }
         }
         return this
     }
