@@ -85,8 +85,7 @@ class SettingActivity : BaseActivity() {
             var inputDialog = InputDialog(this)
             inputDialog.onOkClickListener = object : InputDialog.OnOkClickListener {
                 override fun ok(str: String) {
-                    Toast.makeText(MyApplication.mInstance, str, Toast.LENGTH_SHORT).show()
-
+                    CacheUtil.putString("designColor", str)
                 }
             }
             inputDialog.pop()
