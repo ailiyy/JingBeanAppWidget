@@ -19,7 +19,6 @@ class MenuDialog(var mActivity: Activity) : Dialog(mActivity!!) {
     fun initView(): MenuDialog {
         setContentView(R.layout.dialog_layout_style2)
         mRecyclerView = findViewById(R.id.mRecyclerView)
-        val context = context
         val divierId = context.resources.getIdentifier("android:id/titleDivider", null, null)
         val divider = findViewById<View>(divierId)
         divider?.setBackgroundColor(Color.TRANSPARENT)
