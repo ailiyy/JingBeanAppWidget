@@ -4,6 +4,7 @@ import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.util.Log
@@ -269,7 +270,7 @@ class WidgetUpdateDataUtil {
             remoteViews.setTextViewText(R.id.haveNewVersion, userBean.updateTips)
         }
 
-        var paddingType = CacheUtil.getString("paddingType")
+        val paddingType = CacheUtil.getString("paddingType")
         if (TextUtils.isEmpty(paddingType) || "15dp" == paddingType) {
             remoteViews.setViewPadding(R.id.rootParent, R.dimen.dp_15.dmToPx(), 0, R.dimen.dp_15.dmToPx(), 0)
         } else if ("无边距" == paddingType) {
@@ -281,6 +282,13 @@ class WidgetUpdateDataUtil {
         } else if ("20dp" == paddingType) {
             remoteViews.setViewPadding(R.id.rootParent, R.dimen.dp_20.dmToPx(), 0, R.dimen.dp_20.dmToPx(), 0)
         }
+
+//        val designColor = CacheUtil.getString("designColor")
+//        if (!TextUtils.isEmpty(designColor)) {
+//            remoteViews.setInt(R.id.contentParent, "setBackgroundResource", Color.BLUE)
+//        }
+
+        remoteViews.setInt(R.id.contentParent, "setBackgroundResource", R.drawable.widget_bac1)
 
         val cleatInt2 = Intent(MyApplication.mInstance, MainActivity::class.java)
         cleatInt2.flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -305,15 +313,18 @@ class WidgetUpdateDataUtil {
         }
         remoteViews.setTextViewText(R.id.jingXiang, userBean.jxiang)
 
-
         val cleatIntent = Intent()
         cleatIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        cleatIntent.action = if ("ck" == thisKey) {
-            "com.scott.sayhi"
-        } else if ("ck1" == thisKey) {
-            "com.scott.sayhi1"
-        } else {
-            "com.scott.sayhi2"
+        cleatIntent.action = when (thisKey) {
+            "ck" -> {
+                "com.scott.sayhi"
+            }
+            "ck1" -> {
+                "com.scott.sayhi1"
+            }
+            else -> {
+                "com.scott.sayhi2"
+            }
         }
         val clearIntent3 = PendingIntent.getBroadcast(MyApplication.mInstance, 0, cleatIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         remoteViews.setOnClickPendingIntent(R.id.headImg, clearIntent3)
