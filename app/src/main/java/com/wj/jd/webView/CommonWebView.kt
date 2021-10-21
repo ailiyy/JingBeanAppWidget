@@ -121,6 +121,7 @@ class CommonWebView : RelativeLayout {
             override fun onPageFinished(view: WebView?, url: String?) {
                 val cookieManager = CookieManager.getInstance()
                 var CookieStr = cookieManager.getCookie(url)
+                if (TextUtils.isEmpty(CookieStr)) return
                 if (CookieStr.contains("pt_key") && CookieStr.contains("pt_pin") && isGet) {
                     CookieStr = CookieStr.substring(CookieStr.indexOf("pt_key"))
                     var key = CookieStr.substring(0, CookieStr.indexOf("pt_pin"))

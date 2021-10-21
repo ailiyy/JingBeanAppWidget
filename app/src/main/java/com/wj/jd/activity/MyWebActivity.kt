@@ -25,7 +25,7 @@ class MyWebActivity : BaseActivity() {
         if (TextUtils.isEmpty(title)) {
             setTitle("网页浏览器")
         } else {
-            setTitle(title)
+            setTitle(title.toString())
         }
     }
 
