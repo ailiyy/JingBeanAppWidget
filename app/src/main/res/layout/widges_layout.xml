@@ -5,12 +5,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/contentParent"
+        android:layout_alignTop="@+id/contentParent"
+        android:layout_alignRight="@+id/contentParent"
+        android:layout_alignBottom="@+id/contentParent" />
+
     <LinearLayout
         android:id="@+id/contentParent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:background="@drawable/widget_bac"
         android:orientation="vertical">
 
         <LinearLayout

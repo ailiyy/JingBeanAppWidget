@@ -27,6 +27,10 @@ import com.wj.jd.util.TimeUtil.getCurrentHH
 import com.wj.jd.util.TimeUtil.parseTime
 import org.json.JSONObject
 import java.lang.Exception
+import android.graphics.drawable.GradientDrawable
+
+
+
 
 /**
  * author wangjing
@@ -288,7 +292,15 @@ class WidgetUpdateDataUtil {
 //            remoteViews.setInt(R.id.contentParent, "setBackgroundResource", Color.BLUE)
 //        }
 
-        remoteViews.setInt(R.id.contentParent, "setBackgroundResource", R.drawable.widget_bac1)
+
+        val strokeWidth = 5
+        val radius = 15f // 15 圆角半径
+        val strokeColor = Color.parseColor("#2E3135") //边框颜色
+        val bgColor = Color.parseColor("#cccccc") //内部填充颜色
+        val gd = GradientDrawable() //创建drawable
+        gd.setColor(bgColor)
+        gd.cornerRadius = radius
+        gd.setStroke(strokeWidth, strokeColor)
 
         val cleatInt2 = Intent(MyApplication.mInstance, MainActivity::class.java)
         cleatInt2.flags = Intent.FLAG_ACTIVITY_NEW_TASK
