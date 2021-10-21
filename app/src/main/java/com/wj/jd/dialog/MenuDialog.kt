@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wj.jd.R
 
-class MenuDialog(var mActivity: Activity, var dataList: ArrayList<String>) : Dialog(mActivity!!) {
+class MenuDialog(var mActivity: Activity, var dataList: ArrayList<String>, var onItemClickListener: OnItemClickListener) : Dialog(mActivity!!) {
     private lateinit var mRecyclerView: RecyclerView
 
     init {
@@ -25,7 +25,7 @@ class MenuDialog(var mActivity: Activity, var dataList: ArrayList<String>) : Dia
         window?.setBackgroundDrawableResource(android.R.color.transparent)
         window?.setLayout(context.resources.displayMetrics.widthPixels * 5 / 6, LinearLayout.LayoutParams.WRAP_CONTENT)
 
-        var adapter = MyMenuDialogAdapter(mActivity)
+        var adapter = MyMenuDialogAdapter(mActivity,onItemClickListener)
         adapter.dataList = dataList
         mRecyclerView.layoutManager = LinearLayoutManager(context)
         mRecyclerView.adapter = adapter
@@ -48,5 +48,9 @@ class MenuDialog(var mActivity: Activity, var dataList: ArrayList<String>) : Dia
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    interface OnItemClickListener {
+        fun itemClick(key: String)
     }
 }
