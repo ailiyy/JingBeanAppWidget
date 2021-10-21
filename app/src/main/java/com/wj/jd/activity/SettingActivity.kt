@@ -70,14 +70,6 @@ class SettingActivity : BaseActivity() {
             }
         }
 
-        notifyCationShow.setOnCheckedChangeListener { buttonView, isChecked ->
-            if (isChecked) {
-                CacheUtil.putString("notifyCationShow", "1")
-            } else {
-                CacheUtil.putString("notifyCationShow", "0")
-            }
-        }
-
         settingFinish.setOnClickListener {
             UpdateTask.updateAll()
             Toast.makeText(this, "小组件状态更新完毕", Toast.LENGTH_SHORT).show()
