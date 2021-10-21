@@ -83,6 +83,10 @@ class SettingActivity : BaseActivity() {
             Toast.makeText(this, "小组件状态更新完毕", Toast.LENGTH_SHORT).show()
         }
 
+        paddingTip.setOnClickListener {
+
+        }
+
         padding0.setOnClickListener {
             CacheUtil.putString("paddingType", "padding0")
             paddingTip.text = "无边距"
