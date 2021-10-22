@@ -4,7 +4,6 @@ import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.text.TextUtils
 import android.util.Log
@@ -16,7 +15,6 @@ import com.bumptech.glide.request.transition.Transition
 import com.google.gson.Gson
 import com.wj.jd.MainActivity
 import com.wj.jd.MyApplication
-import com.wj.jd.R
 import com.wj.jd.bean.JingDouBean
 import com.wj.jd.bean.RedPacket
 import com.wj.jd.bean.UserBean
@@ -27,7 +25,9 @@ import com.wj.jd.util.TimeUtil.getCurrentHH
 import com.wj.jd.util.TimeUtil.parseTime
 import org.json.JSONObject
 import java.lang.Exception
-import android.graphics.drawable.GradientDrawable
+
+import android.graphics.BitmapFactory
+import com.wj.jd.R
 
 
 /**
@@ -285,10 +285,12 @@ class WidgetUpdateDataUtil {
             remoteViews.setViewPadding(R.id.rootParent, R.dimen.dp_20.dmToPx(), 0, R.dimen.dp_20.dmToPx(), 0)
         }
 
-//        val designColor = CacheUtil.getString("designColor")
-//        if (!TextUtils.isEmpty(designColor)) {
-//            remoteViews.setInt(R.id.contentParent, "setBackgroundResource", Color.BLUE)
-//        }
+        var designColor = CacheUtil.getString("designColor")
+        if(TextUtils.isEmpty(designColor)){
+            designColor = "#FFFFFF"
+        }
+        var bac = BitmapUtil.getColorBitmap(designColor)
+        remoteViews.setImageViewBitmap(R.id.background, BitmapUtil.bimapRound(bac,20f))
 
         val cleatInt2 = Intent(MyApplication.mInstance, MainActivity::class.java)
         cleatInt2.flags = Intent.FLAG_ACTIVITY_NEW_TASK

@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity : BaseActivity() {
     var paddingDataList = ArrayList<String>()
+    var alphaDataList = ArrayList<Int>()
 
     override fun setLayoutId(): Int {
         return R.layout.activity_setting
@@ -86,6 +87,7 @@ class SettingActivity : BaseActivity() {
             inputDialog.onOkClickListener = object : InputDialog.OnOkClickListener {
                 override fun ok(str: String) {
                     CacheUtil.putString("designColor", str)
+                    designColor.text = str
                 }
             }
             inputDialog.pop()

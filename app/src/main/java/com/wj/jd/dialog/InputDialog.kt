@@ -3,6 +3,7 @@ package com.wj.jd.dialog
 import android.app.Activity
 import android.app.Dialog
 import android.graphics.Color
+import android.text.TextUtils
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wj.jd.MyApplication
 import com.wj.jd.R
+import com.wj.jd.util.CacheUtil
 
 class InputDialog(var mActivity: Activity) : Dialog(mActivity!!) {
     private lateinit var input: EditText
@@ -25,6 +27,13 @@ class InputDialog(var mActivity: Activity) : Dialog(mActivity!!) {
     fun initView(): InputDialog {
         setContentView(R.layout.dialog_layout_style3)
         input = findViewById(R.id.inputColor)
+
+        var designColor = CacheUtil.getString("designColor")
+        if(TextUtils.isEmpty(designColor)){
+            designColor = "#FFFFFF"
+        }
+        input.setText(designColor)
+
         ok = findViewById(R.id.ok)
         val divierId = context.resources.getIdentifier("android:id/titleDivider", null, null)
         val divider = findViewById<View>(divierId)
