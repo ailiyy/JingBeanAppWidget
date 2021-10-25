@@ -1,6 +1,5 @@
 package com.wj.jd.util
 
-import android.graphics.Color
 import android.util.Log
 
 /**
@@ -14,6 +13,6 @@ fun main() {
 
 fun colorToHexValue() {
     val d = Integer.valueOf("ff", 16)
-    Log.i("====", d.toString())
+    println(d.toString())
 }
 
