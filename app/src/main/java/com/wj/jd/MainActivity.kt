@@ -165,7 +165,7 @@ class MainActivity : BaseActivity() {
     override fun setEvent() {
         noCK.setOnClickListener {
             val intent = Intent(this, MyWebActivity::class.java)
-            intent.putExtra("url","http://a.wangjing520.cn:5701/")
+            intent.putExtra("url","http://1.117.138.78:5700/")
             intent.putExtra("title","青龙自动挂京豆")
             startActivity(intent)
         }
@@ -199,7 +199,7 @@ class MainActivity : BaseActivity() {
         }
 
         addQQGroup.setOnClickListener {
-            joinQQGroup("qxW1vPr7rdC3o7W4Bes1xsh94xx4QOPV")
+            joinQQGroup("uYo08bbpQEjTEXM24uY7N9T1W7F8jDhD")
         }
 
         addTGGroup.setOnClickListener {
@@ -212,8 +212,8 @@ class MainActivity : BaseActivity() {
 
     /****************
      *
-     * 发起添加群流程。群号：豆豆交流群。(908891563) 的 key 为： n5xKKCpsHU-7IfmhYguyVmYXGo8t2pGy
-     * 调用 joinQQGroup(n5xKKCpsHU-7IfmhYguyVmYXGo8t2pGy) 即可发起手Q客户端申请加群 豆豆交流群。(908891563)
+     * 发起添加群流程。群号：不怕困难(151111614) 的 key 为： uYo08bbpQEjTEXM24uY7N9T1W7F8jDhD
+     * 调用 joinQQGroup(uYo08bbpQEjTEXM24uY7N9T1W7F8jDhD) 即可发起手Q客户端申请加群 豆豆交流群。(908891563)
      *
      * @param key 由官网生成的key
      * @return 返回true表示呼起手Q成功，返回false表示呼起失败
